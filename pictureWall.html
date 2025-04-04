@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片墙 - 与星儿同行志愿者协会</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Serif SC', serif;
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px 20px;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #a8e6cf, #1de9b6, #00bfa5, #a8e6cf);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            z-index: -1;
+        }
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .honeycomb {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 1400px;
+            padding: 20px;
+            transform: translateY(10px);
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            animation: borderFlow 8s linear infinite;
+        }
+        @keyframes borderFlow {
+            0% { border-color: rgba(168, 230, 207, 0.3); }
+            50% { border-color: rgba(29, 233, 182, 0.5); }
+            100% { border-color: rgba(168, 230, 207, 0.3); }
+        }
+        .honeycomb-row {
+            display: flex;
+            justify-content: center;
+            margin-top: -25px;
+        }
+        .honeycomb-row:first-child {
+            margin-top: 20px;
+        }
+        .honeycomb-row:not(:first-child) {
+            margin-top: -25px;
+        }
+        .honeycomb-cell {
+            width: 150px;
+            height: 150px;
+            margin: 2px;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .honeycomb-cell:hover {
+            transform: scale(1.1);
+            z-index: 2;
+        }
+        .honeycomb-cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            transform: scale(var(--random-scale));
+        }
+        .honeycomb-cell {
+            --random-scale: calc(1 + (random(10) / 20));
+        }
+        .honeycomb-cell:hover img {
+            transform: scale(1.2);
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        @keyframes fadeInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .modal-content img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 90vh;
+            transform: scale(6);
+            transition: transform 0.3s ease;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.1);
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 20px 0 rgba(31, 38, 135, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <a href="index.html" class="back-button">退！退！退！</a>
+    <div class="modal" id="imageModal">
+        <img class="modal-content" id="modalImage">
+    </div>
+    <div class="honeycomb">
+        <!-- 第1行 7张图片 -->
+        <div class="honeycomb-row">
+            <div class="honeycomb-cell"><img src="1.jpg" alt="图片1"></div>
+            <div class="honeycomb-cell"><img src="2.jpg" alt="图片2"></div>
+            <div class="honeycomb-cell"><img src="3.jpg" alt="图片3"></div>
+            <div class="honeycomb-cell"><img src="4.jpg" alt="图片4"></div>
+            <div class="honeycomb-cell"><img src="5.jpg" alt="图片5"></div>
+            <div class="honeycomb-cell"><img src="6.jpg" alt="图片6"></div>
+            <div class="honeycomb-cell"><img src="7.jpg" alt="图片7"></div>
+        </div>
+        <!-- 第2行 6张图片 -->
+        <div class="honeycomb-row">
+            <div class="honeycomb-cell"><img src="8.jpg" alt="图片8"></div>
+            <div class="honeycomb-cell"><img src="9.jpg" alt="图片9"></div>
+            <div class="honeycomb-cell"><img src="10.jpg" alt="图片10"></div>
+            <div class="honeycomb-cell"><img src="11.jpg" alt="图片11"></div>
+            <div class="honeycomb-cell"><img src="12.jpg" alt="图片12"></div>
+            <div class="honeycomb-cell"><img src="13.jpg" alt="图片13"></div>
+        </div>
+        <!-- 第3行 7张图片 -->
+        <div class="honeycomb-row">
+            <div class="honeycomb-cell"><img src="14.jpg" alt="图片14"></div>
+            <div class="honeycomb-cell"><img src="15.jpg" alt="图片15"></div>
+            <div class="honeycomb-cell"><img src="16.jpg" alt="图片16"></div>
+            <div class="honeycomb-cell"><img src="17.jpg" alt="图片17"></div>
+            <div class="honeycomb-cell"><img src="18.jpg" alt="图片18"></div>
+            <div class="honeycomb-cell"><img src="19.jpg" alt="图片19"></div>
+            <div class="honeycomb-cell"><img src="20.jpg" alt="图片20"></div>
+        </div>
+        <!-- 第4行 6张图片 -->
+        <div class="honeycomb-row">
+            <div class="honeycomb-cell"><img src="21.jpg" alt="图片21"></div>
+            <div class="honeycomb-cell"><img src="22.jpg" alt="图片22"></div>
+            <div class="honeycomb-cell"><img src="23.jpg" alt="图片23"></div>
+            <div class="honeycomb-cell"><img src="24.jpeg" alt="图片24"></div>
+            <div class="honeycomb-cell"><img src="25.jpeg" alt="图片25"></div>
+            <div class="honeycomb-cell"><img src="26.jpeg" alt="图片26"></div>
+        </div>
+        <!-- 第5行 7张图片 -->
+        <div class="honeycomb-row">
+            <div class="honeycomb-cell"><img src="27.jpeg" alt="图片27"></div>
+            <div class="honeycomb-cell"><img src="28.jpeg" alt="图片28"></div>
+            <div class="honeycomb-cell"><img src="29.jpeg" alt="图片29"></div>
+            <div class="honeycomb-cell"><img src="30.jpeg" alt="图片30"></div>
+            <div class="honeycomb-cell"><img src="31.jpeg" alt="图片31"></div>
+            <div class="honeycomb-cell"><img src="32.jpeg" alt="图片32"></div>
+            <div class="honeycomb-cell"><img src="33.jpeg" alt="图片33"></div>
+        </div>
+    </div>
+</body>
+</html>
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const cells = document.querySelectorAll('.honeycomb-cell img');
+
+        cells.forEach(img => {
+            img.onclick = function() {
+                modal.style.display = 'block';
+                modalImg.src = this.src;
+            }
+        });
+
+        modal.onclick = function() {
+            modal.style.display = 'none';
+        }
+    </script>
+    <script src="particles.js"></script>
+</body>
+</html>

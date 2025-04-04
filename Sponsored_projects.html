@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>赞助项目 - 与星儿同行志愿者协会</title>
+    <style>
+        :root {
+            --primary: #40E0D0;
+            --secondary: #48D1CC;
+            --bg: #E0FFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: '微软雅黑';
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #D2B4DE, #FFC0CB, #ADD8E6, #D2B4DE);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes logoGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .navbar {
+            background: linear-gradient(45deg, #D2B4DE, #FFC0CB, #ADD8E6, #D2B4DE);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .funny-face {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            margin: 2rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .face {
+            width: 100%;
+            height: 100%;
+            background: #FFD700;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .eye {
+            width: 60px;
+            height: 60px;
+            background: #FFF;
+            border-radius: 50%;
+            position: absolute;
+            top: 80px;
+        }
+
+        .eye.left { left: 60px; }
+        .eye.right { right: 60px; }
+
+        .pupil {
+            width: 30px;
+            height: 30px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            animation: look 3s ease-in-out infinite;
+        }
+
+        @keyframes look {
+            0%, 100% { transform: translate(0); }
+            33% { transform: translate(10px, 5px); }
+            66% { transform: translate(-10px, -5px); }
+        }
+
+        .mouth {
+            width: 180px;
+            height: 80px;
+            background: #FF6B6B;
+            border-radius: 0 0 90px 90px;
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            overflow: hidden;
+        }
+
+        .ad-text {
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin-top: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px var(--primary); }
+            50% { text-shadow: 0 0 20px var(--secondary), 0 0 30px var(--primary); }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            min-height: 600px;
+            margin: 2rem auto;
+        }
+
+        .ad-text {
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin: 2rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="logo" style="background: linear-gradient(45deg, rgba(173, 205, 236, 0.6), rgba(218, 226, 229, 0.6), rgba(135, 206, 250, 0.6), rgba(30, 144, 255, 0.6)); background-size: 400% 400%; animation: logoGradient 8s ease infinite; position: relative;"><img src="社徽.png" alt="社徽" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; position: absolute; top: 0; left: 0; z-index: 1;"><div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; border-radius: 50%;"></div></div>
+            <h1 style="color: white;">与星儿同行志愿者协会</h1>
+        </div>
+        <div class="nav-links">
+            <a href="main.html" class="nav-link">首页</a>
+            <a href="Community_organization_structure.html" class="nav-link">社团架构</a>
+            <a href="Sponsored_projects.html" class="nav-link">赞助项目</a>
+            <a href="JourneyOfLove.html" class="nav-link">爱之旅康复医院</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="ad-text">广告位招租</h1>
+        <div class="funny-face">           
+            <div class="face">
+                <div class="eye left"><div class="pupil"></div></div>
+                <div class="eye right"><div class="pupil"></div></div>
+                <div class="mouth"></div>
+            </div>
+        </div>
+    </div>
+    <script src="particles.js"></script>
+</body>
+</html>
