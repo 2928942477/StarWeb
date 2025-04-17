@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>社团架构 - 与星儿同行志愿者协会</title>
+    <style>
+        :root {
+            --primary: #40E0D0;
+            --secondary: #48D1CC;
+            --bg: #E0FFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: '微软雅黑';
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #D2B4DE, #FFC0CB, #ADD8E6, #D2B4DE);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes logoGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .navbar {
+            background: linear-gradient(45deg, #D2B4DE, #FFC0CB, #ADD8E6, #D2B4DE);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .level {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .position {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            min-width: 150px;
+            cursor: pointer;
+        }
+
+        .position.active {
+            transform: scale(1.2);
+            z-index: 1000;
+        }
+
+        .position .description {
+            display: none;
+            margin-top: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .position.active .description {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .position:hover {
+            transform: translateY(-5px);
+        }
+
+        .position::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .position h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .position p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .level:nth-child(1) { animation-delay: 0.2s; }
+        .level:nth-child(2) { animation-delay: 0.4s; }
+        .level:nth-child(3) { animation-delay: 0.6s; }
+        .level:nth-child(4) { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="logo" style="background: linear-gradient(45deg, rgba(173, 205, 236, 0.6), rgba(218, 226, 229, 0.6), rgba(135, 206, 250, 0.6), rgba(30, 144, 255, 0.6)); background-size: 400% 400%; animation: logoGradient 8s ease infinite; position: relative;"><img src="社徽.png" alt="社徽" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; position: absolute; top: 0; left: 0; z-index: 1;"><div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; border-radius: 50%;"></div></div>
+            <h1 style="color: white;">与星儿同行志愿者协会</h1>
+        </div>
+        <div class="nav-links">
+            <a href="main.html" class="nav-link">首页</a>
+            <a href="Community_organization_structure.html" class="nav-link">社团架构</a>
+            <a href="Sponsored_projects.html" class="nav-link">赞助项目</a>
+            <a href="JourneyOfLove.html" class="nav-link">爱之旅康复医院</a>
+        </div>
+    </nav>
+    <div class="org-chart">
+        <div class="level">
+            <div class="position">
+                <h3>社长</h3>
+                <p class="description">作为社团的最高负责人，统筹协会整体工作，制定发展战略，协调各部门工作，确保协会健康发展。</p>
+            </div>
+        </div>
+
+        <div class="level">
+            <div class="position">
+                <h3>活动部副社长</h3>
+                <p class="description">负责统筹协会各类活动的策划和执行，确保活动的质量和效果，促进志愿服务的开展。</p>
+            </div>
+            <div class="position">
+                <h3>行政部副社长</h3>
+                <p class="description">负责协会日常行政事务管理，人力资源调配，财务管理等工作，保障协会正常运转。</p>
+            </div>
+            <div class="position">
+                <h3>宣传部副社长</h3>
+                <p class="description">负责协会对内对外宣传工作，管理社交媒体平台，提升协会影响力和知名度。</p>
+            </div>
+        </div>
+
+        <div class="level">
+            <div style="display: flex; gap: 2rem; justify-content: center; width: 100%;">
+                <div style="display: flex; flex-direction: column; gap: 2rem;">
+                    <div class="position">
+                        <h3>志愿者组</h3>
+                        <p class="description">负责组织和协调各类志愿服务，为星儿提供关爱和支持，创造温暖友善的互动环境。</p>
+                    </div>
+                    <div class="position">
+                        <h3>策划组</h3>
+                        <p class="description">负责设计和规划各类活动方案，确保活动的创新性和实用性，为星儿提供丰富多彩的体验。</p>
+                    </div>
+                    <div class="position">
+                        <h3>外联组</h3>
+                        <p class="description">负责与外部机构建立合作关系，拓展资源渠道，为协会发展提供更多支持和机会。</p>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 2rem;">
+                    <div class="position">
+                        <h3>人力资源组</h3>
+                        <p class="description">负责协会成员招募、培训和管理，建立完善的人才培养体系，促进团队健康发展。</p>
+                    </div>
+                    <div class="position">
+                        <h3>财务组</h3>
+                        <p class="description">负责协会财务管理，确保资金使用透明规范，为协会运营提供有力保障。</p>
+                    </div>
+                    <div class="position">
+                        <h3>培训组</h3>
+                        <p class="description">负责设计和实施志愿者培训计划，提升服务质量，确保志愿者具备必要的知识和技能。</p>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 2rem;">
+                    <div class="position">
+                        <h3>网关组</h3>
+                        <p class="description">负责协会网络平台的建设和维护，提供稳定的技术支持，促进信息传播和交流。</p>
+                    </div>
+                    <div class="position">
+                        <h3>摄影摄像组</h3>
+                        <p class="description">负责活动的影像记录和制作，通过专业的摄影摄像技术，保存美好回忆。</p>
+                    </div>
+                    <div class="position">
+                        <h3>美工组</h3>
+                        <p class="description">负责协会视觉设计工作，创作富有创意的宣传材料，提升协会形象。</p>
+                    </div>
+                    <div class="position">
+                        <h3>新闻组</h3>
+                        <p class="description">负责协会新闻报道和文案创作，及时传递协会动态，讲好星儿故事。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.position').forEach(position => {
+            position.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // 移除其他元素的active类
+                document.querySelectorAll('.position.active').forEach(activePosition => {
+                    if (activePosition !== position) {
+                        activePosition.classList.remove('active');
+                    }
+                });
+                // 切换当前元素的active类
+                position.classList.toggle('active');
+            });
+        });
+
+        // 添加点击空白区域关闭放大模块的功能
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.position.active').forEach(activePosition => {
+                activePosition.classList.remove('active');
+            });
+        });
+    </script>
+    <script src="particles.js"></script>
+</body>
+</html>

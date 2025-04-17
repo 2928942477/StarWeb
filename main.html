@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>与星儿同行志愿者协会</title>
+    <style>
+        :root {
+            --primary: #40E0D0;
+            --secondary: #48D1CC;
+            --bg: #E0FFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: '微软雅黑';
+            background: var(--bg);
+            overflow-x: hidden;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        /* 渐变背景效果 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #D2B4DE, #FFC0CB, #ADD8E6, #D2B4DE);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes logoGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background: linear-gradient(45deg, #D2B4DE, #FFC0CB, #ADD8E6, #D2B4DE);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* 活动展示区域 */
+        .activities {
+            width: 100%;
+            max-width: 1200px;
+            height: 83vh;
+            margin: 2rem auto 0;
+            padding: 2rem;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(45deg, rgba(210, 180, 222, 0.3), rgba(255, 192, 203, 0.3), rgba(173, 216, 230, 0.3));
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .activity-cards-container {
+            display: flex;
+            gap: 2rem;
+            animation: none;
+            padding: 1rem;
+            width: max-content;
+            position: relative;
+            will-change: transform;
+        }
+
+        .activity-cards-container::after {
+            content: '';
+            display: block;
+            width: 2rem;
+        }
+
+        .activity-cards-container:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollCards {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-100% / 2)); }
+        }
+
+        .activity-card {
+            min-width: 300px;
+            flex: 0 0 300px;
+            background: rgba(245, 245, 245, 0.9);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            margin-right: 2rem;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .activity-image {
+            width: 100%;
+            height: 200px;
+            background: var(--primary);
+        }
+
+        .activity-content {
+            padding: 1.5rem;
+        }
+
+        .activity-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .activity-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(166,123,91,0.3);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="logo" style="background: linear-gradient(45deg, rgba(173, 205, 236, 0.6), rgba(218, 226, 229, 0.6), rgba(135, 206, 250, 0.6), rgba(30, 144, 255, 0.6)); background-size: 400% 400%; animation: logoGradient 8s ease infinite; position: relative;"><img src="社徽.png" alt="社徽" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; position: absolute; top: 0; left: 0; z-index: 1;"><div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; border-radius: 50%;"></div></div>
+            <h1 style="color: white;">与星儿同行志愿者协会</h1>
+        </div>
+        <div class="nav-links">
+            <a href="main.html" class="nav-link">首页</a>
+            <a href="Community_organization_structure.html" class="nav-link">社团架构</a>
+            <a href="Sponsored_projects.html" class="nav-link">赞助项目</a>
+            <a href="JourneyOfLove.html" class="nav-link">爱之旅康复医院</a>
+        </div>
+    </nav>
+
+    <section class="activities" id="activities">
+        <div class="activity-cards-container">
+            <div class="activity-card">
+                <div class="activity-image" style="background: url('成员简介.png') center/cover;"></div>
+                <div class="activity-content">
+                    <h3 class="activity-title">社团成员</h3>
+                    <p class="activity-description">成员简介</p>
+                    <a href="https://mp.weixin.qq.com/s/3wDPvW_utEEWBax-bVMNkw" class="btn">了解详情</a>
+                </div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-image" style="background: url('爱之旅.png') center/cover;"></div>
+                <div class="activity-content">
+                    <h3 class="activity-title">爱之旅</h3>
+                    <p class="activity-description">为打破自闭症儿童与外界之间的"心墙"，<br>
+                        通过给予"星儿"温暖和希望，助力他们学习基本的社交技能，从而更好地融入社会。<br>
+                        同时让志愿者们深入体悟自闭症儿童的内心世界，以志愿热忱驱散冷漠，唤起社会的广泛关注，<br>
+                        决定开展“爱之旅·暖融孤独，点亮星光”志愿活动。</p>
+                    <a href="https://mp.weixin.qq.com/s/lvsHwMGdFzHze0P_U2I40A" class="btn">了解详情</a>
+                </div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-image" style="background: url('一信一年.png') center/cover;"></div>
+                <div class="activity-content">
+                    <h3 class="activity-title">一信一年</h3>
+                    <p class="activity-description">云中谁寄锦书来？<br>
+                        春雨漾时，情丝柔柔。<br>
+                        书信是古老的交流方式，蕴藏人类千百年来累积的情感，传递难以言说的话语。<br>
+                        亲爱的朋友们，通过"一封信"去倾撒对星儿们的关爱吧，请把我们的爱分享给可爱的星儿们，因为我们愿意去爱星儿们，因为星儿们值得被爱。
+                    </p>
+                    <a href="https://mp.weixin.qq.com/s/4BF1RGE-VoFycYNzduz9Mg" class="btn">了解详情</a>
+                </div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-image" style="background: url('十周年.png') center/cover;"></div>
+                <div class="activity-content">
+                    <h3 class="activity-title">十周年晚会</h3>
+                    <p class="activity-description">星儿已经陪伴我们走过十年啦<br>
+                        十年间星儿风雨兼程<br>
+                        但始终坚守初心<br>
+                        每一岁都行走在自己的热爱里</p>
+                    <a href="https://mp.weixin.qq.com/s/uuWmLEets1BfGM4hezE5eg" class="btn">了解详情</a>
+                </div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-image" style="background:url('星语星愿.png') center/cover;"></div>
+                <div class="activity-content">
+                    <h3 class="activity-title">星与星愿 爱不孤单</h3>
+                    <p class="activity-description">在我们的身边，有这样的一个孩子——自闭症儿童。<br>
+                        他们在社交互动和情感回应方面面临着严重的困难，<br>
+                        仿佛被困在自己的小小世界里，与外界有着一层难以打破的隔阂。<br>
+                        然而，我们认为爱与温暖是可以跨越这层隔阂的。<br>
+                        临沂大学与星儿同行志愿者协会秉持着这样的信念，<br>
+                        在11月29日开展了“星语星愿·爱不孤单”活动。</p>
+                    <a href="https://mp.weixin.qq.com/s/OU7j7tfI2fAd6JEWHxGAww" class="btn">了解详情</a>
+                </div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-image" style="background: url('绘本推荐.png') center/cover;"></div>
+                <div class="activity-content">
+                    <h3 class="activity-title">绘本推荐</h3>
+                    <p class="activity-description">《小笛和流泪的橘子》</p>
+                    <a href="https://mp.weixin.qq.com/s/JZYUnNVCS_wZ3nEJ5_uOQQ" class="btn">了解详情</a>
+                </div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-image" style="background: url('电影推荐.png') center/cover;"></div>
+                <div class="activity-content">
+                    <h3 class="activity-title">电影推荐</h3>
+                    <p class="activity-description">《我和托马斯》</p>
+                    <a href="https://mp.weixin.qq.com/s/U2tWHu8YPWyc3w_1SoYUwQ" class="btn">简介</a>
+                    <a href="https://www.youtube.com/watch?v=-y2bYAEmoqw" class="btn">观看电影</a>
+                </div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-image" style="background: url('星言星语.png') center/cover;"></div>
+                <div class="activity-content">
+                    <h3 class="activity-title">星言星语</h3>
+                    <p class="activity-description">春天是大自然最慷慨的馈赠，每一处角落都洋溢着新生的喜悦。<br>
+                        看那田间，沉睡一冬的种子，在春雨的滋润下，<br>
+                        迫不及待地破土而出，顶开头顶的泥土，努力向着阳光生长。<br>
+                        那一抹抹倔强的嫩绿，是生命对希望的执着追求。<br>
+                        正如我们的人生，无论遭遇多少寒冬，<br>
+                        只要心怀希望，就一定能在春天里迎来新的开始。</p>
+                    <a href="https://mp.weixin.qq.com/s/yf0KojzPQ2wEBIzCjN1Luw" class="btn">了解详情</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.activity-cards-container');
+            const cards = container.innerHTML;
+            container.innerHTML = cards + cards;
+            container.style.animation = 'scrollCards 30s linear infinite';
+
+            // 添加鼠标悬停事件
+            container.addEventListener('mouseenter', function() {
+                this.style.animationPlayState = 'paused';
+            });
+
+            // 添加鼠标移出事件
+            container.addEventListener('mouseleave', function() {
+                this.style.animationPlayState = 'running';
+            });
+        });
+    </script>
+    <script src="particles.js"></script>
+</body>
+</html>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.activity-cards-container');
+            const cards = container.innerHTML;
+            container.innerHTML = cards + cards;
+            container.style.animation = 'scrollCards 30s linear infinite';
+
+            // 添加鼠标悬停事件
+            container.addEventListener('mouseenter', function() {
+                this.style.animationPlayState = 'paused';
+            });
+
+            // 添加鼠标移出事件
+            container.addEventListener('mouseleave', function() {
+                this.style.animationPlayState = 'running';
+            });
+        });
+    </script>
+</body>
+</html>

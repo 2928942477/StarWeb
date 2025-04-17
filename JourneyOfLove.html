@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>爱之旅康复医院 - 与星儿同行志愿者协会</title>
+    <style>
+        :root {
+            --primary: #40E0D0;
+            --secondary: #48D1CC;
+            --bg: #E0FFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: '微软雅黑';
+            background: var(--bg);
+            overflow-x: hidden;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #D2B4DE, #FFC0CB, #ADD8E6, #D2B4DE);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes logoGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .navbar {
+            background: linear-gradient(45deg, #D2B4DE, #FFC0CB, #ADD8E6, #D2B4DE);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .section-content {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-title {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="logo" style="background: linear-gradient(45deg, rgba(173, 205, 236, 0.6), rgba(218, 226, 229, 0.6), rgba(135, 206, 250, 0.6), rgba(30, 144, 255, 0.6)); background-size: 400% 400%; animation: logoGradient 8s ease infinite; position: relative;"><img src="社徽.png" alt="社徽" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; position: absolute; top: 0; left: 0; z-index: 1;"><div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; border-radius: 50%;"></div></div>
+            <h1 style="color: white;">与星儿同行志愿者协会</h1>
+        </div>
+        <div class="nav-links">
+            <a href="main.html" class="nav-link">首页</a>
+            <a href="Community_organization_structure.html" class="nav-link">社团架构</a>
+            <a href="Sponsored_projects.html" class="nav-link">赞助项目</a>
+            <a href="JourneyOfLove.html" class="nav-link">爱之旅康复医院</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <section class="section">
+            <h2 class="section-title">爱之旅康复医院简介</h2>
+            <p class="section-content">
+                爱之旅康复医院位于临沂市罗庄区，是一家专注于特殊儿童康复治疗的专业医疗机构。我们致力于为自闭症、脑瘫、智力障碍等特殊儿童提供全方位的康复服务。医院拥有一支专业的医疗团队，配备先进的康复设备，采用国际先进的康复理念和方法，为每位特殊儿童制定个性化的康复方案。
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">特色服务</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3 class="feature-title">个性化康复方案</h3>
+                    <p class="feature-description">根据每位儿童的具体情况，制定科学、系统的康复训练计划，确保康复效果最大化。</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">专业医疗团队</h3>
+                    <p class="feature-description">由经验丰富的康复医师、治疗师、特教老师等组成的专业团队，提供全方位的康复指导。</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">先进康复设备</h3>
+                    <p class="feature-description">引进国际先进的康复训练设备，为儿童提供科学、有效的康复训练支持。</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">家庭康复指导</h3>
+                    <p class="feature-description">为家长提供专业的康复知识培训，指导家长在家进行科学的康复训练。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">康复项目</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3 class="feature-title">感统训练</h3>
+                    <p class="feature-description">通过专业的感觉统合训练，提升儿童的感知觉能力和运动协调能力。</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">语言训练</h3>
+                    <p class="feature-description">针对语言发育迟缓儿童，开展系统的语言训练，提升语言交流能力。</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">认知训练</h3>
+                    <p class="feature-description">通过趣味性的认知训练，提升儿童的注意力、记忆力和思维能力。</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">运动康复</h3>
+                    <p class="feature-description">针对运动功能障碍的儿童，进行专业的物理治疗和运动康复训练。</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="content" style="margin-bottom: 2rem;">
+        <section class="section">
+            <div class="feature-card" style="text-align: center;">
+                <p style="font-size: 1.2rem; color: var(--primary);">
+                    临沂市爱之旅康复医院官方网址：
+                    <a href="http://lyzibizheng.com/" style="color: var(--secondary); text-decoration: none; transition: all 0.3s ease;" target="_blank">http://lyzibizheng.com/</a>
+                </p>
+            </div>
+        </section>
+    </div>
+    <script src="particles.js"></script>
+</body>
+</html>
